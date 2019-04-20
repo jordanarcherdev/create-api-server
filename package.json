@@ -8,6 +8,10 @@
   },
   "author": "Jordan Archer",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jordanarcherdev/create-api-server.git"
+  },
   "dependencies": {
     "@jordanarcherdev/debug-console": "0.0.1",
     "yargs": "^13.2.2"
