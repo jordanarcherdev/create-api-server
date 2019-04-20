@@ -1,0 +1,15 @@
+{
+  "name": "create-api-server",
+  "version": "0.0.1",
+  "description": "Creates a mongoose and express api server template",
+  "main": "app.js",
+  "bin": {
+    "create-api-server": "./bin/create-server.js"
+  },
+  "author": "Jordan Archer",
+  "license": "ISC",
+  "dependencies": {
+    "@jordanarcherdev/debug-console": "0.0.1",
+    "yargs": "^13.2.2"
+  }
+}
