@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 
 //Console Colours
-const { logHeading, logWarning, logError } = require('@jordanarcherdev/debug-console')
+const { logHeading, logWarning, logError } = require('@jordanarcherdev/debug-console');
+//Config file 
+const { createDirectories, buildPackage, mongoAddress } = require('./config');
 
 const fs = require('fs');
 // Get the current working directory from where the app has been run
@@ -21,13 +23,7 @@ if(!dbName){
 }
 
 //Define directories to be created
-const directories = [
-			`${homename}`,
-			`${homename}/config`,
-			`${homename}/routes/api`,
-			`${homename}/models`,
-			`${homename}/validation`
-		    ];
+const directories = createDirectories(homename);
 
 
 
@@ -55,28 +51,8 @@ function makeDirectories(directories){
 //Continue when all directories have been made
 makeDirectories(directories).then(() => {
 
-	//Package.json config variables
-	const description = 'A great new server';
-	//Use dashes in variables
-	const bodyParser = 'body-parser';
-
-	const package = {
-				name: homename,
-				version: '0.0.1',
-				description: description,
-				main: 'server.js',
-				scripts: {
-					start: 'node server.js',
-					rundev: 'nodemon'
-					},
-				author: '',
-				license: 'ISC',
-				dependencies: {
-					express: 'latest',
-					mongoose: 'latest',
-					[bodyParser]: 'latest'
-				}
-			}
+	//Build the package.json object
+	const package = buildPackage(homename);
 
 	//Write package object to json
 	let json = JSON.stringify(package);
@@ -121,8 +97,7 @@ function traverse(dir, result=[]){
 traverse(dir);
 
 //Write config/keys.js
-//Address to local instance of mongodb
-const mongoAddress = 'mongodb://127.0.0.1:27017';
+
 //Write the contents of the keys file
 const keys = `module.exports = { mongoURI: "${mongoAddress}/${dbName}" }`;
 
