@@ -4,6 +4,7 @@
 const { logHeading, logWarning, logError } = require('@jordanarcherdev/debug-console')
 
 const fs = require('fs');
+// Get the current working directory from where the app has been run
 const cwd = process.cwd();
 const path = require('path');
 //Arguments
@@ -16,7 +17,7 @@ if(!homename){
 	homename = 'apiServer';
 }
 if(!dbName){
-	dbName = '< Your Database Name >';
+	dbName = '<YourDatabaseName>';
 }
 
 //Define directories to be created
@@ -30,12 +31,13 @@ const directories = [
 
 
 
-//Promise to make directories before proceeding
+//Promise to make directories before proceeding, otherwise the app tries to make the files withouth the directories
 function makeDirectories(directories){
 	const p = new Promise((resolve, reject) => {
 		let counter = 0;
 		for (let i = 0; i < directories.length; i++){
 			let route = cwd + '/' + directories[i];
+			//Using the recursive feature so save having to make individual directories
 			fs.mkdir(route, {recursive: true}, (err) => {
 				if(err) throw err;
 				counter++;
@@ -131,6 +133,7 @@ fs.writeFile(`${homedir}/config/keys.js`, keys, (err) => {
 
 //Install npm packages
 const { exec } = require('child_process');
+//Install dependencies
 logWarning('Please wait for packages to install...');
 exec(`npm install`, {cwd: `${homedir}`}, (err, stdout, stderr) => {
 	if(err){
