@@ -1,5 +1,5 @@
 module.exports = {
-  
+
   //Directories to be created by the app
 	createDirectories: (homename) => {
     	const directories = [
@@ -11,14 +11,14 @@ module.exports = {
         ];
       return directories;
     },
-  
+
   //Build package.json object
   buildPackage: (homename) => {
-  	//Package description 
+  	//Package description
     const description = 'A great new server!';
-    //In order to pass variables with dashes and other characters, use es2016 syntax 
+    //In order to pass variables with dashes and other characters, use es2016 syntax
     const bodyParser = 'body-parser';
-    
+
     //Create the package object
     const package = {
     	name: homename,
@@ -38,7 +38,7 @@ module.exports = {
     }
     return package;
   },
-  
-  mongoAddress: 'mongodb://127.0.0.1:27017';
-  
+
+  mongoAddress: 'mongodb://127.0.0.1:27017'
+
 }

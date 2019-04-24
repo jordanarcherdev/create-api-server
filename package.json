@@ -1,6 +1,6 @@
 {
   "name": "create-api-server",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Creates a mongoose and express api server template",
   "main": "app.js",
   "bin": {

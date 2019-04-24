@@ -2,7 +2,7 @@
 
 //Console Colours
 const { logHeading, logWarning, logError } = require('@jordanarcherdev/debug-console');
-//Config file 
+//Config file
 const { createDirectories, buildPackage, mongoAddress } = require('./config');
 
 const fs = require('fs');
@@ -78,15 +78,15 @@ const dir = __dirname + '/boilerPlateFiles';
 function traverse(dir, result=[]){
 	fs.readdirSync(dir).forEach((file) => {
 		const filePath = path.resolve(dir, file);
-		const fileInfo = { file, path: filePath};
+		const fileStats = { file, path: filePath};
 		if(fs.statSync(filePath).isDirectory()){
-			fileInfo.files=[];
+			fileStats.files=[];
 			result.push(fileStats);
-			return traverse(filePath, fileInfo.files);
+			return traverse(filePath, fileStats.files);
 		}
 		let fileDestination = filePath.split(`/boilerPlateFiles`).pop();
 
-		result.push(fileInfo);
+		result.push(fileStats);
 		fs.copyFile(filePath, `/${homedir}/${fileDestination}`,(err) => {
 			if(err)throw err;
 		});
@@ -97,7 +97,6 @@ function traverse(dir, result=[]){
 traverse(dir);
 
 //Write config/keys.js
-
 //Write the contents of the keys file
 const keys = `module.exports = { mongoURI: "${mongoAddress}/${dbName}" }`;
 
@@ -117,7 +116,7 @@ exec(`npm install`, {cwd: `${homedir}`}, (err, stdout, stderr) => {
 	}
 	console.log(`stdout: ${stdout}`);
 	logError(stderr);
-	console.log(`Server created! cd into ${homename} and type npm start to run server`);
+	console.log(`Server created! cd into ${homename} and type npm start to run server on port 5000`);
 })
 
 });

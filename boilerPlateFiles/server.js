@@ -6,8 +6,7 @@ const path = require('path');
 const { mongoURI } = require('./config/keys');
 
 //Load route files here
-
-//Default index file, can be removed 
+//Default index file, can be removed
 const index = require('./routes/index')
 
 const app = express();
